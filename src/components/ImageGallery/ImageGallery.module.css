@@ -1,0 +1,95 @@
+.galleryWrapper {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.searchWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.searchInputField {
+  padding: 10px;
+  width: 50%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+}
+
+.searchBtn {
+  padding: 10px 20px;
+  background-color: #3f51b5;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.searchBtn:hover {
+  background-color: #303f9f;
+}
+
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.gridItem img {
+  width: 350px;
+  height: 300px;
+  display: block;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.gridItem img:hover {
+  transform: scale(1.05);
+}
+
+.paginationWrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.loadMoreBtn {
+  padding: 10px 20px;
+  background-color: #3f51b5;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.loadMoreBtn:hover {
+  background-color: #303f9f;
+}
+
+.loadingMessage {
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.galleryContainer {
+  padding-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
