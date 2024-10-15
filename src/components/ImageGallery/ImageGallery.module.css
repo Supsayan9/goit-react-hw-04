@@ -1,8 +1,31 @@
 .galleryWrapper {
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.gridItem {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.gridItem img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.gridItem:hover img {
+  transform: scale(1.05);
 }
 
 .searchWrapper {
