@@ -5,6 +5,7 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import LoaderComponent from "./components/Loader/Loader";
 import { fetchImages } from "./components/Services/api";
+import ImageModal from "./components/ImageModal/ImageModal";
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -22,7 +23,7 @@ const App = () => {
       try {
         const data = await fetchImages(query, page);
         setImages((prevImages) => [...prevImages, ...data.results]);
-        setTotalPages(Math.ceil(data.total / 12)); // assuming 12 images per page
+        setTotalPages(Math.ceil(data.total / 12));
       } catch (error) {
         console.error("Error fetching images:", error);
       } finally {
@@ -35,8 +36,8 @@ const App = () => {
 
   const handleSearchSubmit = (newQuery) => {
     setQuery(newQuery);
-    setImages([]); // reset images on new search
-    setPage(1); // reset page to 1
+    setImages([]);
+    setPage(1);
   };
 
   const handleImageClick = (image) => {
@@ -61,14 +62,19 @@ const App = () => {
       <ImageGallery
         images={images}
         onImageClick={handleImageClick}
-        selectedImage={selectedImage}
-        onCloseModal={handleCloseModal}
         page={page}
         totalPages={totalPages}
         onNextPage={handleNextPage}
       />
       {page < totalPages && !isLoading && (
         <LoadMoreBtn onClick={handleNextPage} />
+      )}
+      {selectedImage && (
+        <ImageModal
+          image={selectedImage}
+          isOpen={!!selectedImage}
+          onClose={handleCloseModal}
+        />
       )}
     </div>
   );

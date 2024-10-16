@@ -1,13 +1,7 @@
 import styles from "./ImageGallery.module.css";
-import ImageModal from "../ImageModal/ImageModal";
 import PropTypes from "prop-types";
 
-const ImageGallery = ({
-  images,
-  onImageClick,
-  selectedImage,
-  onCloseModal,
-}) => {
+const ImageGallery = ({ images, onImageClick }) => {
   return (
     <div className={styles.galleryWrapper}>
       <ul className={styles.imageGrid}>
@@ -21,9 +15,6 @@ const ImageGallery = ({
           </li>
         ))}
       </ul>
-      {selectedImage && (
-        <ImageModal image={selectedImage} onClose={onCloseModal} />
-      )}
     </div>
   );
 };
@@ -31,8 +22,6 @@ const ImageGallery = ({
 ImageGallery.propTypes = {
   images: PropTypes.array.isRequired,
   onImageClick: PropTypes.func.isRequired,
-  selectedImage: PropTypes.object,
-  onCloseModal: PropTypes.func.isRequired,
 };
 
 export default ImageGallery;
