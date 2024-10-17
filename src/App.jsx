@@ -4,6 +4,7 @@ import ImageGallery from "./components/ImageGallery/ImageGallery";
 import SearchBar from "./components/SearchBar/SearchBar";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import LoaderComponent from "./components/Loader/Loader";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import { fetchImages } from "./components/Services/api";
 import ImageModal from "./components/ImageModal/ImageModal";
 
@@ -13,6 +14,7 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
@@ -20,12 +22,15 @@ const App = () => {
       if (!query) return;
 
       setIsLoading(true);
+      setError(null);
+
       try {
         const data = await fetchImages(query, page);
         setImages((prevImages) => [...prevImages, ...data.results]);
         setTotalPages(Math.ceil(data.total / 12));
-      } catch (error) {
-        console.error("Error fetching images:", error);
+      } catch (err) {
+        setError("Error fetching images. Please try again.");
+        console.error("Error fetching images:", err);
       } finally {
         setIsLoading(false);
       }
@@ -59,6 +64,7 @@ const App = () => {
       <Toaster />
       <SearchBar onSubmit={handleSearchSubmit} />
       {isLoading && <LoaderComponent />}
+      {error && <ErrorMessage message={error} />}
       <ImageGallery
         images={images}
         onImageClick={handleImageClick}
@@ -66,7 +72,7 @@ const App = () => {
         totalPages={totalPages}
         onNextPage={handleNextPage}
       />
-      {page < totalPages && !isLoading && (
+      {page < totalPages && !isLoading && !error && (
         <LoadMoreBtn onClick={handleNextPage} />
       )}
       {selectedImage && (
